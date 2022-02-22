@@ -11,13 +11,13 @@ public class Stretegy {
                 .with(builder -> {
                     builder.emailAddr = "alice@gmail.com";
                     builder.isVerified = false;
-                    builder.friendUserIds = Arrays.asList(201,202,203,204,206,207);
+                    builder.friendsUserIds = Arrays.asList(201,202,203,204,206,207);
                 }).build();
         User user2 = User.builder(2,"Bob")
                 .with(builder -> {
                     builder.emailAddr = "bob@gmail.com";
                     builder.isVerified = true;
-                    builder.friendUserIds = Arrays.asList(201,202);
+                    builder.friendsUserIds = Arrays.asList(201,202);
                 }).build();
         List<User> users = Arrays.asList(user1, user2);
 
@@ -30,16 +30,17 @@ public class Stretegy {
                 .filter(user->!user.isVerified())
                 .forEach(emailSender::sendEmail);
 
+        System.out.println(user1);
         emailSender.setEmailProvider(makeMoreFriendsEmailProvider);
         users.stream()
                 .filter(User::isVerified)
-                .filter(user->user.getFriendUserIds().size()<=5)
+                .filter(user->user.getFriendsUserIds().size()<=5)
                 .forEach(emailSender::sendEmail);
 
         emailSender.setEmailProvider(user->"'Play With Friends' email for "+ user.getName());
         users.stream()
                 .filter(User::isVerified)
-                .filter(user -> user.getFriendUserIds().size()>5)
+                .filter(user -> user.getFriendsUserIds().size()>5)
                 .forEach(emailSender::sendEmail);
     }
 }

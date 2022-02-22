@@ -13,13 +13,14 @@ public class User {
     private String emailAddr;
     private boolean isVerified;
     private LocalDateTime createAt;
-    private List<Integer> friendUserIds;
+    private List<Integer> friendsUserIds;
 
     public User(Builder builder){
         this.id = builder.id;
         this.name = builder.name;
         this.emailAddr = builder.emailAddr;
         this.isVerified = builder.isVerified;
+        this.friendsUserIds = builder.friendsUserIds;
     }
 
     public static Builder builder(int id, String name){
@@ -32,7 +33,7 @@ public class User {
         public String emailAddr;
         public boolean isVerified;
         public LocalDateTime createAt;
-        public List<Integer> friendUserIds;
+        public List<Integer> friendsUserIds;
 
         //stream 함수 사용
         public Builder with(Consumer<Builder> consumer){
@@ -79,7 +80,7 @@ public class User {
         return createAt;
     }
 
-    public List<Integer> getFriendUserIds() {
-        return friendUserIds;
+    public List<Integer> getFriendsUserIds() {
+        return friendsUserIds;
     }
 }
